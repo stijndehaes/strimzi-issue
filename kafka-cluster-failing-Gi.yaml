@@ -1,0 +1,29 @@
+apiVersion: kafka.strimzi.io/v1alpha1
+kind: Kafka
+metadata:
+  name: strimzi-cluster-gi
+spec:
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}
+  kafka:
+    config:
+      offsets.topic.replication.factor: 3
+      transaction.state.log.min.isr: 2
+      transaction.state.log.replication.factor: 3
+    listeners:
+      plain: {}
+      tls: {}
+    replicas: 1
+    storage:
+      type: ephemeral
+    resources:
+      requests:
+        cpu: 500m
+        memory: 1.1Gi
+  zookeeper:
+    config:
+      heapOptions: -Xms200M -Xmx200M
+    replicas: 1
+    storage:
+      type: ephemeral
